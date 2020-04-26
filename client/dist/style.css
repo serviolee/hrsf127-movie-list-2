@@ -27,6 +27,16 @@ body {
   margin: 8px;
 }
 
-.searchInput {
+.searchInput, .addMovieInput {
   margin-right: 8px;
+}
+
+.addMovie {
+  margin: 8px;
+}
+
+.buttonAdd {
+  background-color: limegreen;
+  color: white;
+  font-weight: bold;
 }
