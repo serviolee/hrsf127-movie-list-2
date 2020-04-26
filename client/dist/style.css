@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif, arial;
+}
+
+.heading {
+  background-color: lightslategray;
+  text-align: center;
+}
+
+.app {
+  border: 1px solid lightgray;
+  padding: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.movielist {
+  border: 1px solid lightgray;
+}
+.movielistentry {
+  border: 1px solid lightgray;
+  padding: 4px;
+  padding-left: 16px;
+}
+
+.search {
+  margin: 8px;
+}
+
+.searchInput {
+  margin-right: 8px;
+}
