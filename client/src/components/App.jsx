@@ -4,6 +4,7 @@ import MovieListEntry from './MovieListEntry.jsx';
 import Search from './Search.jsx';
 import AddMovie from './AddMovie.jsx';
 import mockMovieData from '../../../mockMovieData.js';
+import axios from 'axios';
 
 
 class App extends React.Component {
@@ -20,6 +21,10 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAddMovie = this.handleAddMovie.bind(this);
     this.handleAddMovieSubmit = this.handleAddMovieSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.getMovies();
   }
 
   handleChange(e) {
@@ -65,6 +70,16 @@ class App extends React.Component {
     this.setState({
       movies: copyOfMovies
     })
+  }
+
+  getMovies() {
+    axios.get('/api/movies')
+      .then(function(response) {
+        console.log(response.data);
+      })
+      .catch(function(err) {
+        console.log('error for getMovies request: ', err);
+      })
   }
 
   render() {

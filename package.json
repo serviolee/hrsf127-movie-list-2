@@ -9,6 +9,7 @@
   },
   "author": "Beth Johnson",
   "license": "ISC",
+  "proxy": "http://localhost:3000",
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
