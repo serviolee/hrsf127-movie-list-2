@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: mockMovieData,
+      movies: [],
       searchValue: '',
       foundMovies: [],
       searchedList: false,
@@ -21,6 +21,8 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAddMovie = this.handleAddMovie.bind(this);
     this.handleAddMovieSubmit = this.handleAddMovieSubmit.bind(this);
+    this.getMovies = this.getMovies.bind(this);
+    this.postMovie = this.postMovie.bind(this);
   }
 
   componentDidMount() {
@@ -59,7 +61,7 @@ class App extends React.Component {
     let movieToAdd = e.target.value; // 'hackers'
     this.setState({
       movieToAdd: movieToAdd
-    })
+    }, () => this.postMovie())
   }
 
   handleAddMovieSubmit(e) {
@@ -74,12 +76,28 @@ class App extends React.Component {
 
   getMovies() {
     axios.get('/api/movies')
-      .then(function(response) {
-        console.log(response.data);
+      .then((response) => {
+        this.setState({
+          movies: response.data
+        });
       })
       .catch(function(err) {
         console.log('error for getMovies request: ', err);
       })
+  }
+
+  postMovie() {
+    axios.post('/api/movie', {
+      title: this.state.movieToAdd,
+      overview: "description of movie",
+      release_date: "1999"
+    })
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(err) {
+      console.log('error from postMovie: ', err);
+    })
   }
 
   render() {

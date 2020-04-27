@@ -1,10 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const db = require('../db/db.js');
+const controller = require('./controllers/controller.js');
+console.log(controller);
 const app = express();
 const port = 3000;
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const movies = [
   {title: 'Mean Girls'},
@@ -14,9 +18,13 @@ const movies = [
   {title: 'Ex Machina'},
 ];
 
-app.get('/api/movies', function(req, res) {
-  res.send(movies);
-})
+app.get('/api/movies', controller.getAllMovies);
+// app.post('/api/movie', (req, res) => {
+//   console.log(req.body);
+//   res.send(req.body);
+// });
+app.post('/api/movie', controller.addMovie);
+
 
 app.use(function(req, res) {
   console.log('inside express');
