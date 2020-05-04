@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('../db/db.js');
+// const db = require('../db/db.js');
 const controller = require('./controllers/controller.js');
-console.log(controller);
 const app = express();
 const port = 3000;
 

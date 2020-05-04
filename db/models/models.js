@@ -14,7 +14,7 @@ function getAllMovies(callback) { // callback from controller
 
 function addMovie(param, callback) {
   console.log('param: ', param);
-  let queryString = `INSERT INTO movie (title, overview, release_date) value ("${param.title}", "${param.overview}", "${param.release_date}")`;
+  let queryString = `INSERT INTO movie (title, overview, release_date, isWatched) value ("${param.title}", "${param.overview}", "${param.release_date}", "${param.isWatched}")`;
   db.query(queryString, function(err, data) {
     if (err) {
       console.log('error from POST models: ', err);

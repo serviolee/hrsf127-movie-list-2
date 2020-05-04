@@ -61,7 +61,7 @@ class App extends React.Component {
     let movieToAdd = e.target.value; // 'hackers'
     this.setState({
       movieToAdd: movieToAdd
-    }, () => this.postMovie())
+    }, () => this.postMovie)
   }
 
   handleAddMovieSubmit(e) {
@@ -79,7 +79,7 @@ class App extends React.Component {
       .then((response) => {
         this.setState({
           movies: response.data
-        });
+        }, () => {console.log(response.data)});
       })
       .catch(function(err) {
         console.log('error for getMovies request: ', err);
@@ -90,7 +90,8 @@ class App extends React.Component {
     axios.post('/api/movie', {
       title: this.state.movieToAdd,
       overview: "description of movie",
-      release_date: "1999"
+      release_date: "1999",
+      isWatched: false
     })
     .then(function(response) {
       console.log(response);

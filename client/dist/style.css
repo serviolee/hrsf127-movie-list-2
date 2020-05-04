@@ -19,7 +19,7 @@ body {
 }
 .movielistentry {
   border: 1px solid lightgray;
-  padding: 4px;
+  padding: 8px;
   padding-left: 16px;
 }
 
@@ -39,4 +39,12 @@ body {
   background-color: limegreen;
   color: white;
   font-weight: bold;
+}
+
+.watchButton {
+  float: right;
+  background-color: limegreen;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
 }
