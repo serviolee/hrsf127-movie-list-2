@@ -24,7 +24,7 @@ body {
 }
 
 .search {
-  margin: 8px;
+  margin: 12px 16px 0px 0px;
 }
 
 .searchInput, .addMovieInput {
@@ -47,4 +47,25 @@ body {
   color: white;
   font-weight: bold;
   border-radius: 3px;
+}
+
+.watchBox-container {
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.buttonWatched, .buttonToWatch {
+  padding: 15px;
+  font-weight: bold;
+}
+
+.buttonWatched {
+  background-color: limegreen;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.buttonToWatch {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
