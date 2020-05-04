@@ -17,12 +17,15 @@ class App extends React.Component {
       foundMovies: [],
       searchedList: false,
       movieToAdd: '',
+      allMovies: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAddMovie = this.handleAddMovie.bind(this);
     this.handleAddMovieSubmit = this.handleAddMovieSubmit.bind(this);
     this.handleWatchedMovieClick = this.handleWatchedMovieClick.bind(this);
+    this.handleMovieBeenWatched = this.handleMovieBeenWatched.bind(this);
+    this.handleMovieToWatch = this.handleMovieToWatch.bind(this);
     this.getMovies = this.getMovies.bind(this);
     this.postMovie = this.postMovie.bind(this);
   }
@@ -34,7 +37,7 @@ class App extends React.Component {
   handleChange(e) {
     // console.log('handleChange');
     let searchValue = e.target.value;
-    console.log(this.state.searchValue);
+    // console.log(this.state.searchValue);
     this.setState({
       searchValue: searchValue
     })
@@ -68,36 +71,51 @@ class App extends React.Component {
 
   handleAddMovieSubmit(e) {
     let movie = {title: this.state.movieToAdd}; // {title: hackers}
-    let copyOfMovies = [...this.state.movies];
+    let copyOfMovies = [...this.state.allMovies];
     copyOfMovies.push(movie);
     console.log(copyOfMovies);
     this.setState({
-      movies: copyOfMovies
+      allMovies: copyOfMovies
     })
   }
 
   handleWatchedMovieClick(movieId) {
-    console.log(movieId);
-    // make a copy of movies array
-    // iterate thru the array and check if id matches
-    // change isWatched property on found element to true
-    // use setState to overwrite movie value with copied array
-    let copyOfMovies = [...this.state.movies];
+    // console.log(movieId);
+    let copyOfMovies = [...this.state.allMovies];
     copyOfMovies.forEach((movie) => {
       if (movie.id === movieId) {
         movie.isWatched = 1;
       }
     })
     this.setState({
-      movies: copyOfMovies
-    }, () => {console.log(this.state.movies)})
+      allMoviess: copyOfMovies
+    }, () => {console.log(this.state.allMovies)})
+  }
+
+  handleMovieBeenWatched() {
+    const movieBeenWatched = this.state.allMovies.filter((movie) => {
+      return movie.isWatched === 1;
+    })
+    this.setState({
+       movies: movieBeenWatched
+    })
+  }
+
+  handleMovieToWatch() {
+    const movieBeenWatched = this.state.allMovies.filter((movie) => {
+      return movie.isWatched === 0;
+    })
+    this.setState({
+       movies: movieBeenWatched
+    })
   }
 
   getMovies() {
     axios.get('/api/movies')
       .then((response) => {
         this.setState({
-          movies: response.data
+          movies: response.data,
+          allMovies: response.data
         }, () => {console.log(response.data)});
       })
       .catch(function(err) {
@@ -125,7 +143,7 @@ class App extends React.Component {
       <div className="app">
         <h1 className="heading">Movie List</h1>
         <AddMovie handleAddMovie={this.handleAddMovie} handleAddMovieSubmit={this.handleAddMovieSubmit}/>
-        <Search searchValue={this.state.searchValue}  handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <Search searchValue={this.state.searchValue}  handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleMovieBeenWatched={this.handleMovieBeenWatched} handleMovieToWatch={this.handleMovieToWatch}/>
         <MovieList movies={this.state.movies} foundMovies={this.state.foundMovies} searchedList={this.state.searchedList} handleWatchedMovieClick={this.handleWatchedMovieClick}/>
       </div>
     )
