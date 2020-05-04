@@ -49,11 +49,17 @@ class App extends React.Component {
     let targetValue  = this.state.searchValue;
     let moviesArray = this.state.movies;
     let tempMoviesArray = [];
-    for (let i = 0; i < moviesArray.length; i++) {
-      if (targetValue.toLowerCase() === moviesArray[i].title.toLowerCase()) {
-        tempMoviesArray.push(moviesArray[i]);
+    // for (let i = 0; i < moviesArray.length; i++) {
+    //   if (targetValue.toLowerCase() === moviesArray[i].title.toLowerCase()) {
+    //     tempMoviesArray.push(moviesArray[i]);
+    //   }
+    // }
+    moviesArray.forEach((movie) => {
+      if(movie.title.toLowerCase().indexOf(targetValue.toLowerCase()) === -1){
+        return;
       }
-    }
+      tempMoviesArray.push(movie);
+    });
     this.setState({
       foundMovies: tempMoviesArray,
       searchedList: true
