@@ -2,8 +2,8 @@ import React from 'react';
 
 const MovieModal = (props) => {
   return (
-    <div>
-      Modal
+    <div className="movielist">
+      {props.movieToDisplay.name}
     </div>
   )
 }

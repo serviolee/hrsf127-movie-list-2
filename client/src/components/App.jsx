@@ -200,7 +200,7 @@ class App extends React.Component {
         <h1 className="heading">Movie List</h1>
         <AddMovie handleAddMovie={this.handleAddMovie} handleAddMovieSubmit={this.handleAddMovieSubmit}/>
         <Search searchValue={this.state.searchValue}  handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleMovieBeenWatched={this.handleMovieBeenWatched} handleMovieToWatch={this.handleMovieToWatch}/>
-        {this.state.displaySingleMovie ? <MovieModal /> : <MovieList movies={this.state.movies} foundMovies={this.state.foundMovies} searchedList={this.state.searchedList} handleWatchedMovieClick={this.handleWatchedMovieClick} handleMovieClick={this.handleMovieClick}
+        {this.state.displaySingleMovie ? <MovieModal movieToDisplay={this.state.movieToDisplay}/> : <MovieList movies={this.state.movies} foundMovies={this.state.foundMovies} searchedList={this.state.searchedList} handleWatchedMovieClick={this.handleWatchedMovieClick} handleMovieClick={this.handleMovieClick}
         />}
       </div>
     )
