@@ -12,7 +12,8 @@ function MovieList (props) {
     return (
       <div>
         {props.foundMovies.map((movie, index) => {
-        return <MovieListEntry key={index} movie={movie}/>
+          console.log(movie);
+        return <MovieListEntry key={index} movie={movie} handleMovieClick={props.handleMovieClick}/>
         })}
       </div>
     )
@@ -20,7 +21,7 @@ function MovieList (props) {
     return (
       <div className="movielist">
       {props.movies.map((movie, index) => {
-          return <MovieListEntry key={index} movie={movie} handleWatchedMovieClick={props.handleWatchedMovieClick}/>
+          return <MovieListEntry key={index} movie={movie} handleWatchedMovieClick={props.handleWatchedMovieClick} handleMovieClick={props.handleMovieClick}/>
         })}
       </div>
     )

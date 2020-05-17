@@ -17,6 +17,8 @@ const movies = [
   {title: 'Ex Machina'},
 ];
 
+// app.get('/', (req, res) => res.send('Hello World!'));
+
 app.get('/api/movies', controller.getAllMovies);
 // app.post('/api/movie', (req, res) => {
 //   console.log(req.body);

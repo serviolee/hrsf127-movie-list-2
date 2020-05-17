@@ -14,8 +14,8 @@ class MovieListEntry extends React.Component {
   render() {
     return (
       <div className="movielistentry">
-        {this.props.movie.title}
-        <WatchButton movieId={this.props.movie.id} handleWatchedMovieClick={this.props.handleWatchedMovieClick}/>
+        <span className="movie-title" onClick={this.props.handleMovieClick}>{this.props.movie.title}</span>
+        <WatchButton movieId={this.props.movie.id} handleWatchedMovieClick={this.props.handleWatchedMovieClick} />
       </div>
     )
   }
