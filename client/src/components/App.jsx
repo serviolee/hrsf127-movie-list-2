@@ -4,6 +4,7 @@ import MovieListEntry from './MovieListEntry.jsx';
 import Search from './Search.jsx';
 import AddMovie from './AddMovie.jsx';
 import WatchBox from './WatchBox.jsx';
+import MovieModal from './MovieModal.jsx';
 import mockMovieData from '../../../mockMovieData.js';
 import axios from 'axios';
 
@@ -18,7 +19,8 @@ class App extends React.Component {
       searchedList: false,
       movieToAdd: '',
       allMovies: [],
-      clickedMovie: '',
+      movieToDisplay: {},
+      displaySingleMovie: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -70,12 +72,10 @@ class App extends React.Component {
       .then((response) => {
         console.log(response.data.results);
         let movies = response.data.results.map((movie) => {
-          return {
-            title: movie.name,
-            movie_id: movie.id,
-            isWatched: false
-          }
+          movie.isWatched = false;
+          return movie
         })
+
         this.setState({
           foundMovies: movies,
           searchedList: true
@@ -182,8 +182,16 @@ class App extends React.Component {
   }
 
   handleMovieClick(id) {
-    console.log('handle movie click');
-    console.log(id);
+    console.log(typeof id);
+    let parseIntID = parseInt(id);
+    console.log(this.state.foundMovies);
+    let movieToDisplay = this.state.foundMovies.find((movie) => {
+      return movie.id === parseIntID;
+    })
+    this.setState({
+      movieToDisplay: movieToDisplay,
+      displaySingleMovie: true
+    }, () => { console.log(movieToDisplay)})
   }
 
   render() {
@@ -192,7 +200,8 @@ class App extends React.Component {
         <h1 className="heading">Movie List</h1>
         <AddMovie handleAddMovie={this.handleAddMovie} handleAddMovieSubmit={this.handleAddMovieSubmit}/>
         <Search searchValue={this.state.searchValue}  handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleMovieBeenWatched={this.handleMovieBeenWatched} handleMovieToWatch={this.handleMovieToWatch}/>
-        <MovieList movies={this.state.movies} foundMovies={this.state.foundMovies} searchedList={this.state.searchedList} handleWatchedMovieClick={this.handleWatchedMovieClick} handleMovieClick={this.handleMovieClick}/>
+        {this.state.displaySingleMovie ? <MovieModal /> : <MovieList movies={this.state.movies} foundMovies={this.state.foundMovies} searchedList={this.state.searchedList} handleWatchedMovieClick={this.handleWatchedMovieClick} handleMovieClick={this.handleMovieClick}
+        />}
       </div>
     )
   }

@@ -12,8 +12,9 @@ function MovieList (props) {
     return (
       <div>
         {props.foundMovies.map((movie, index) => {
-          console.log(movie);
-        return <MovieListEntry key={index} movie={movie} handleMovieClick={props.handleMovieClick}/>
+          // console.log(movie.name);
+        return <MovieListEntry key={index} movie={movie}
+        handleWatchedMovieClick={props.handleWatchedMovieClick} handleMovieClick={props.handleMovieClick}/>
         })}
       </div>
     )
